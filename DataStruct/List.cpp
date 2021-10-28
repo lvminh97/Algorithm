@@ -12,9 +12,19 @@ struct Node{
 
 struct List{
     Node *head, *rear;
+    int size;
 
     List(){
         head = rear = nullptr;
+        size = 0;
+    }
+
+    Node *front(){
+        return head;
+    }
+
+    Node *back(){
+        return rear;
     }
 
     void push_back(int v){
@@ -27,6 +37,7 @@ struct List{
             nNode->prev = rear;
             rear = nNode;
         }
+        size++;
     }
 
     void push_front(int v){
@@ -39,14 +50,31 @@ struct List{
             head->prev = nNode;
             head = nNode;
         }
+        size++;
     }
     
-    void pop_back(){
-
+    Node *pop_back(){
+        Node *tmp = rear;
+        rear = rear->prev;
+        if(rear != nullptr){
+            rear->next = nullptr;
+        }
+        size--;
+        return tmp;
     }
 
-    void pop_front(){
+    Node *pop_front(){
+        Node *tmp = head;
+        head = head->next;
+        if(head != nullptr){
+            head->prev = nullptr;
+        }
+        size--;
+        return tmp;
+    }
 
+    bool remove(int index){
+        
     }
 };
 
